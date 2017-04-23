@@ -55,6 +55,35 @@ public class JobData {
     }
 
     /**
+     * Returns results of searching all the jobs column data by value, using
+     * inclusion of the search term.
+     *
+     * For example, searching for "Enterprise" will include results
+     * with "Enterprise Holdings, Inc".
+     *
+     * @param value Value of the field to search for
+     * @return List of all jobs matching the criteria
+     */
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+
+            for (String column : row.values()) {
+
+                if (column.contains(value)) {
+                    jobs.add(row);
+                    break;
+                }
+            }
+        }
+        return jobs;
+    }
+
+    /**
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
      *
